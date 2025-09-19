@@ -1,12 +1,23 @@
-package com.example.letrapensante;
+package com.example.letrapensante.model;
 
 public class Libro {
     private String id;      
     private String nombre;
     private String autor;
     private String editorial;
-    private int anioEdicion; 
+    private String anioEdicion; 
     private String ubicacion;
+
+	public Libro() {}
+	
+	public Libro(String id, String nombre, String autor, String editorial, String anioEdicion, String ubicacion) {
+    this.id = id;
+    this.nombre = nombre;
+    this.autor = autor;
+    this.editorial = editorial;
+    this.anioEdicion = anioEdicion;
+    this.ubicacion = ubicacion;
+}
 
 	public String getId() {
 		return this.id;
@@ -40,12 +51,12 @@ public class Libro {
 		this.editorial = Editorial;
 	}
 
-	public int getAnioEdicion() {
+	public String getAnioEdicion() {
 		return this.anioEdicion;
 	}
 
-	public void setAnioEdicion(int AEdicion) {
-		this.anioEdicion = AEdicion;
+	public void setAnioEdicion(String anioEdicion) {
+		this.anioEdicion = anioEdicion;
 	}
 
 	public String getUbicacion() {
