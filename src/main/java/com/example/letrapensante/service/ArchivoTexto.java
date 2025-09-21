@@ -93,7 +93,11 @@ public class ArchivoTexto {
         return null;
     }
 
-    public String insertarRegistro(Libro libro) {
+
+    public String insertarRegistro(Libro libro){
+        if (!validarLibro(libro)) {
+            return "Error: datos inválidos, por favor verifique los campos.";
+        }
         if (buscarRegistro(libro.getId()) != null) {
             return "El registro con ID " + libro.getId() + " ya existe.";
         }
@@ -112,5 +116,20 @@ public class ArchivoTexto {
             e.printStackTrace(System.out);
             return "Error al insertar";
         }
+    }
+
+    private boolean validarLibro(Libro libro) {
+        if (libro.getId() == null || libro.getId().trim().isEmpty()) return false;
+        if (libro.getNombre() == null || libro.getNombre().trim().isEmpty()) return false;
+        if (libro.getAutor() == null || libro.getAutor().trim().isEmpty()) return false;
+        if (libro.getEditorial() == null || libro.getEditorial().trim().isEmpty()) return false;
+        if (libro.getUbicacion() == null || libro.getUbicacion().trim().isEmpty()) return false;
+        try {
+            int anio = Integer.parseInt(libro.getAnioEdicion());
+            if (anio <= 0) return false;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 }
