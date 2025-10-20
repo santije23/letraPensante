@@ -1,15 +1,23 @@
 package com.example.letrapensante.service;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files; 
+import java.nio.file.StandardCopyOption; 
+import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import com.example.letrapensante.model.Libro;
 
+import jakarta.annotation.PostConstruct;
 
 @Service
 public class ArchivoTexto {
@@ -78,7 +86,33 @@ public class ArchivoTexto {
     }
     
 
-    public String crearArchivo(){
+    private File archivo;
+    private int numeroRegistros = 0;
+    private final String NOMBRE_ARCHIVO = "BD.txt";
+
+    @PostConstruct
+    public void init() {
+        try {
+            // Ruta real donde se pueda escribir (funciona local y en Azure)
+            String rutaArchivoReal = System.getProperty("user.dir") + File.separator + NOMBRE_ARCHIVO;
+            archivo = new File(rutaArchivoReal);
+
+            if (!archivo.exists()) {
+                // Copiar desde resources si no existe
+                ClassPathResource resource = new ClassPathResource(NOMBRE_ARCHIVO);
+                InputStream is = resource.getInputStream();
+                Files.copy(is, archivo.toPath());
+                is.close();
+                System.out.println("Archivo BD.txt copiado desde resources a: " + archivo.getAbsolutePath());
+            } else {
+                System.out.println("Archivo ya existe en: " + archivo.getAbsolutePath());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String crearArchivo() {
         try {
             if (archivo.createNewFile()) {
                 return "Archivo creado correctamente";
@@ -89,16 +123,14 @@ public class ArchivoTexto {
             e.printStackTrace(System.out);
             return "Error al crear el archivo: " + e.getMessage();
         }
-        
     }
 
-    public void eliminarArchivo(){
+    public void eliminarArchivo() {
         if (archivo.delete()) {
             System.out.println("BD eliminada");
         } else {
             System.out.println("Error al eliminar");
         }
-        
     }
 
     public Libro buscarRegistro(String idBuscado) {
@@ -198,4 +230,3 @@ public class ArchivoTexto {
         return true;
     }
 }
-

@@ -1,0 +1,11 @@
+8,Cien años de soledad,Gabriel García Márquez,Sudamericana,1967,Estante A1
+3,Don Quijote de la Mancha,Miguel de Cervantes,Francisco de Robles,1605,Estante B3
+10,El Principito,Antoine de Saint-Exupéry,Reynal & Hitchcock,1943,Estante C2
+1,1984,George Orwell,Secker & Warburg,1949,Estante D1
+6,La Odisea,Homero,Desconocida,800 a.C.,Estante E4
+2,Hamlet,William Shakespeare,Nicolás Ling,1603,Estante F2
+9,Orgullo y prejuicio,Jane Austen,T. Egerton,1813,Estante G1
+4,Crimen y castigo,Fiódor Dostoyevski,The Russian Messenger,1866,Estante H3
+7,Rayuela,Julio Cortázar,Sudamericana,1963,Estante I2
+5,Fahrenheit 451,Ray Bradbury,Ballantine Books,1953,Estante J5
+33,Cien años de soledad,Gabriel García Márquez,Sudamericana,1967,Estante A
